@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="/resources/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.6.1/css/ol.css" type="text/css">
+        <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.6.1/build/ol.js"></script>
+        <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+        <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+        <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+        <title>Dashboard Climático</title>
+
+        <script
+            id="sap-ui-bootstrap"
+            src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+            data-sap-ui-theme="sap_fiori_3"
+            data-sap-ui-resourceroots='{
+        "com.terebinto.sapui5": "./"
+      }'
+            data-sap-ui-oninit="module:sap/ui/core/ComponentSupport"
+            data-sap-ui-compatVersion="edge"
+            data-sap-ui-async="true"
+            data-sap-ui-frameOptions="trusted"
+        ></script>
+        <style>
+            #map {
+              height: 400px;
+              width: 100%;
+            }
+          </style>
+    </head>
+
+    <body class="sapUiBody">
+        <div
+            data-sap-ui-component
+            data-name="com.terebinto.sapui5"
+            data-id="container"
+            data-settings='{"id" : "sapui5"}'
+        ></div>
+      
+    </body>
+</html>

@@ -1,0 +1,137 @@
+ <mvc:View controllerName="com.terebinto.sapui5.controller.MainView"
+  displayBlock="true"
+  xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+	xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:layout="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+	xmlns:smart="sap.ui.comp.smartfield" xmlns="sap.m" xmlns:m="sap.m" xmlns:vbm="sap.ui.vbm" xmlns:chart="sap.chart" xmlns:data="sap.chart.data" xmlns:table="sap.ui.table">
+  <App id="idAppControl" >
+    <pages>
+      <Page title="{i18n>title}">
+        <content>
+          <HBox alignItems="Stretch" direction="Row" fitContainer="true" width="100%" height="auto" justifyContent="Start" renderType="Div"
+									visible="true" displayInline="true" class="sapUiTinyMargin">
+            <items>
+              <Button text="Cidade" type="Transparent" iconFirst="true" width="127.3125px" enabled="true" visible="true" iconDensityAware="false"/>
+              <Select forceSelection="true" id="comboEstacao" width="400px" selectedKey="{citySelectedModel>/selectedCity}"
+                items="{ path: 'dataCityModel>/cities' }" change="getDataApi()">
+                <core:ListItem key="{dataCityModel>id}" text="{dataCityModel>name}" icon="sap-icon://map"/>
+              </Select>
+            </items>
+            <layoutData/>
+          </HBox>
+          <Panel height="auto" width="100%" headerText="Dados Climáticos" expandable="false" expanded="true" expandAnimation="true">
+            <content>
+              <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div"
+                visible="true" displayInline="false">
+                <items>
+                  <GenericTile header="Temperatura" subheader="" frameType="OneByOne"
+                    class="sapUiSmallMarginTop sapUiSmallMarginBottom sapUiMediumMarginBegin sapUiSmallMarginEnd">
+                    <tileContent>
+                      <TileContent footer="" unit="" >
+                        <content>
+                          <NumericContent value="{weatherModel>/weather/temp}" valueColor="Good" indicator="None" icon="sap-icon://temperature"/>
+                        </content>
+                      </TileContent>
+                    </tileContent>
+                  </GenericTile>
+                  <GenericTile header="Umidade" subheader="" frameType="OneByOne" class="sapUiSmallMargin">
+                    <tileContent>
+                      <TileContent footer="" unit="">
+                        <content>
+                          <NumericContent value="{weatherModel>/weather/humidity}" valueColor="Neutral" indicator="None" icon="sap-icon://measuring-point"/>
+                        </content>
+                      </TileContent>
+                    </tileContent>
+                  </GenericTile>
+                  <GenericTile header="Sensação Térmica" subheader="" frameType="OneByOne" class="sapUiSmallMargin">
+                    <tileContent>
+                      <TileContent footer="" unit="">
+                        <content>
+                          <NumericContent value="{weatherModel>/weather/feels_like}" valueColor="Critical" indicator="None" icon="sap-icon://status-negative"/>
+                        </content>
+                      </TileContent>
+                    </tileContent>
+                  </GenericTile>
+                  <GenericTile header="Temp. Máxima" subheader="" frameType="OneByOne" class="sapUiSmallMargin">
+                    <tileContent>
+                      <TileContent footer="" unit="">
+                        <content>
+                          <NumericContent value="{weatherModel>/weather/temp_max}" valueColor="Good" indicator="None" icon="sap-icon://temperature"/>
+                        </content>
+                      </TileContent>
+                    </tileContent>
+                  </GenericTile>
+                  <GenericTile header="Temp. Mínima" subheader="" frameType="OneByOne" class="sapUiSmallMargin" >
+                    <tileContent>
+                      <TileContent footer="" unit="">
+                        <content>
+                          <NumericContent value="{weatherModel>/weather/temp_min}" valueColor="Critical" indicator="None" icon="sap-icon://temperature"/>
+                        </content>
+                      </TileContent>
+                    </tileContent>
+                  </GenericTile>
+                  <GenericTile header="Velocidade Vento" subheader="" frameType="OneByOne" class="sapUiSmallMargin">
+                    <tileContent>
+                      <TileContent footer="" unit="">
+                        <content>
+                          <NumericContent value="{weatherModel>/wind/speed}" valueColor="Good" indicator="None" icon="sap-icon://crossed-line-chart"/>
+                        </content>
+                      </TileContent>
+                    </tileContent>
+                  </GenericTile>
+                  <GenericTile header="Pressão Atm." subheader="" frameType="OneByOne" class="sapUiSmallMargin">
+                    <tileContent>
+                      <TileContent footer="" unit="">
+                        <content>
+                          <NumericContent value="{weatherModel>/weather/pressure}" valueColor="Good" indicator="None" icon="sap-icon://crossed-line-chart"/>
+                        </content>
+                      </TileContent>
+                    </tileContent>
+                  </GenericTile>
+                </items>
+                <layoutData/>
+              </HBox>
+              <layout:BlockLayout background="Solid" visible="true">
+                    <layout:content>
+                      <layout:BlockLayoutRow scrollable="false">
+                        <layout:content>
+                          <layout:BlockLayoutCell width="2" title="" titleAlignment="Begin" titleLevel="Auto" class="borderCard mRight">
+                            <layout:content>
+                            <core:HTML content='&lt;div id=&quot;map&quot; style=&quot; height: 370px;&quot;&gt;&lt;/div&gt;'></core:HTML>
+                            
+                            </layout:content>
+                          </layout:BlockLayoutCell>
+                          <layout:BlockLayoutCell width="2" title="" titleAlignment="Begin" titleLevel="Auto" class="borderCard">
+                            <layout:content>
+                              <core:HTML content='&lt;div id=&quot;chartdiv&quot; style=&quot; height: 300px;&quot;&gt;&lt;/div&gt;'></core:HTML>
+                            </layout:content>
+                          </layout:BlockLayoutCell>
+                        </layout:content>
+                      </layout:BlockLayoutRow>
+                        </layout:content>
+                  </layout:BlockLayout>
+            </content>
+          </Panel>
+           <Panel height="auto" width="100%" headerText="Previsão para os próximos 7 dias" expandable="false" expanded="true" expandAnimation="true">
+            <content>
+
+              <layout:BlockLayout background="Solid" visible="true">
+                <layout:content>
+                  <layout:BlockLayoutRow scrollable="false">
+                    <layout:content>
+                      <layout:BlockLayoutCell width="1" title="" titleAlignment="Begin" titleLevel="Auto" class="borderCard">
+                        <layout:content>
+                        <core:HTML content='&lt;div id=&quot;chartdiv2&quot; style=&quot; height: 300px;&quot;&gt;&lt;/div&gt;'></core:HTML>
+                        </layout:content>
+                      </layout:BlockLayoutCell>
+                    </layout:content>
+                  </layout:BlockLayoutRow>
+                    </layout:content>
+              </layout:BlockLayout>
+            
+            </content>
+          </Panel>
+        </content>
+      </Page>
+    </pages>
+  </App>
+</mvc:View>
